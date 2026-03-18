@@ -1,0 +1,647 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Florile Mariucii</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Lora:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet"/>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --cream: #f5efe6;
+      --warm-white: #fdfaf6;
+      --terracotta: #c47c5a;
+      --terracotta-dark: #a0603e;
+      --bark: #6b4c35;
+      --moss: #7a8c6e;
+      --moss-dark: #5a6b4e;
+      --sand: #d9c4a8;
+      --deep: #2e1f14;
+      --text: #3d2b1f;
+      --text-light: #7a6254;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Lora', Georgia, serif;
+      background: var(--warm-white);
+      color: var(--text);
+      overflow-x: hidden;
+    }
+
+    /* ─── NAV ─── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 1.2rem 2.5rem;
+      background: rgba(253,250,246,0.92);
+      backdrop-filter: blur(8px);
+      border-bottom: 1px solid var(--sand);
+    }
+    .nav-logo {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.4rem;
+      font-style: italic;
+      color: var(--bark);
+      text-decoration: none;
+      letter-spacing: 0.02em;
+    }
+    .nav-links { display: flex; gap: 2rem; list-style: none; }
+    .nav-links a {
+      text-decoration: none;
+      color: var(--text-light);
+      font-size: 0.85rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--terracotta); }
+
+    /* ─── HERO ─── */
+    #hero {
+      min-height: 100vh;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      padding-top: 70px;
+    }
+    .hero-text {
+      display: flex; flex-direction: column; justify-content: center;
+      padding: 5rem 4rem 5rem 5rem;
+      background: var(--cream);
+      position: relative;
+      overflow: hidden;
+    }
+    .hero-text::before {
+      content: '✿';
+      position: absolute; top: -2rem; left: -2rem;
+      font-size: 18rem; color: var(--sand); opacity: 0.3;
+      line-height: 1; pointer-events: none;
+    }
+    .hero-badge {
+      display: inline-block;
+      background: var(--moss);
+      color: #fff;
+      font-size: 0.7rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      padding: 0.35rem 1rem;
+      border-radius: 100px;
+      margin-bottom: 1.5rem;
+      width: fit-content;
+    }
+    .hero-title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2.8rem, 5vw, 4.2rem);
+      line-height: 1.1;
+      color: var(--deep);
+      margin-bottom: 1.2rem;
+    }
+    .hero-title em { color: var(--terracotta); font-style: italic; }
+    .hero-sub {
+      font-size: 1.05rem;
+      color: var(--text-light);
+      line-height: 1.8;
+      max-width: 400px;
+      margin-bottom: 2.5rem;
+    }
+    .btn-primary {
+      display: inline-flex; align-items: center; gap: 0.6rem;
+      background: var(--terracotta);
+      color: #fff;
+      padding: 0.9rem 2rem;
+      border-radius: 4px;
+      text-decoration: none;
+      font-size: 0.9rem;
+      letter-spacing: 0.05em;
+      font-family: 'Lora', serif;
+      transition: background 0.2s, transform 0.15s;
+      width: fit-content;
+      border: none; cursor: pointer;
+    }
+    .btn-primary:hover { background: var(--terracotta-dark); transform: translateY(-1px); }
+    .btn-secondary {
+      display: inline-flex; align-items: center; gap: 0.6rem;
+      background: transparent;
+      color: var(--bark);
+      padding: 0.9rem 2rem;
+      border-radius: 4px;
+      text-decoration: none;
+      font-size: 0.9rem;
+      letter-spacing: 0.05em;
+      font-family: 'Lora', serif;
+      border: 1.5px solid var(--sand);
+      transition: border-color 0.2s, transform 0.15s;
+      cursor: pointer;
+    }
+    .btn-secondary:hover { border-color: var(--bark); transform: translateY(-1px); }
+    .hero-actions { display: flex; gap: 1rem; flex-wrap: wrap; }
+
+    .hero-image {
+      background:
+        linear-gradient(135deg, rgba(196,124,90,0.15) 0%, transparent 60%),
+        url('https://images.unsplash.com/photo-1487530811015-780bbbdcf06e?w=900&q=80') center/cover no-repeat;
+      position: relative;
+      min-height: 500px;
+    }
+    .hero-image-overlay {
+      position: absolute; inset: 0;
+      background: linear-gradient(to right, var(--cream) 0%, transparent 20%);
+    }
+
+    /* ─── DIVIDER ─── */
+    .divider {
+      text-align: center;
+      padding: 3rem 1rem 1rem;
+      color: var(--terracotta);
+      font-size: 1.4rem;
+      letter-spacing: 1rem;
+    }
+
+    /* ─── SECTION HEADER ─── */
+    .section-header {
+      text-align: center;
+      padding: 1rem 1rem 3rem;
+    }
+    .section-label {
+      display: inline-block;
+      font-size: 0.72rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--moss);
+      margin-bottom: 0.8rem;
+    }
+    .section-title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(1.8rem, 3vw, 2.6rem);
+      color: var(--deep);
+      line-height: 1.2;
+    }
+    .section-title em { color: var(--terracotta); font-style: italic; }
+    .section-desc {
+      margin-top: 1rem;
+      color: var(--text-light);
+      font-size: 0.95rem;
+      line-height: 1.8;
+      max-width: 500px;
+      margin-left: auto; margin-right: auto;
+    }
+
+    /* ─── CATALOG ─── */
+    #catalog { background: var(--warm-white); padding: 4rem 2rem 5rem; }
+
+    .catalog-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+      gap: 2rem;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+    .product-card {
+      background: var(--cream);
+      border-radius: 8px;
+      overflow: hidden;
+      border: 1px solid var(--sand);
+      transition: transform 0.25s, box-shadow 0.25s;
+      cursor: pointer;
+    }
+    .product-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 12px 40px rgba(100,60,30,0.12);
+    }
+    .product-img {
+      width: 100%; height: 220px;
+      object-fit: cover;
+      display: block;
+    }
+    .product-info { padding: 1.3rem 1.4rem 1.6rem; }
+    .product-tag {
+      font-size: 0.68rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--moss);
+      margin-bottom: 0.4rem;
+    }
+    .product-name {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.2rem;
+      color: var(--deep);
+      margin-bottom: 0.5rem;
+    }
+    .product-desc {
+      font-size: 0.85rem;
+      color: var(--text-light);
+      line-height: 1.6;
+      margin-bottom: 1rem;
+    }
+    .product-footer {
+      display: flex; justify-content: space-between; align-items: center;
+    }
+    .product-price {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.15rem;
+      color: var(--terracotta);
+    }
+    .btn-order-small {
+      background: var(--moss);
+      color: #fff;
+      border: none;
+      padding: 0.5rem 1rem;
+      border-radius: 4px;
+      font-size: 0.8rem;
+      font-family: 'Lora', serif;
+      cursor: pointer;
+      text-decoration: none;
+      transition: background 0.2s;
+    }
+    .btn-order-small:hover { background: var(--moss-dark); }
+
+    /* ─── WHATSAPP STRIP ─── */
+    #order {
+      background: var(--bark);
+      padding: 4rem 2rem;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    #order::before {
+      content: '🌸';
+      position: absolute; left: 5%; top: 50%; transform: translateY(-50%);
+      font-size: 6rem; opacity: 0.12;
+    }
+    #order::after {
+      content: '🌸';
+      position: absolute; right: 5%; top: 50%; transform: translateY(-50%);
+      font-size: 6rem; opacity: 0.12;
+    }
+    .order-title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(1.6rem, 3vw, 2.2rem);
+      color: var(--cream);
+      margin-bottom: 0.8rem;
+    }
+    .order-sub {
+      color: var(--sand);
+      font-size: 0.95rem;
+      margin-bottom: 2rem;
+      line-height: 1.7;
+    }
+    .btn-whatsapp {
+      display: inline-flex; align-items: center; gap: 0.7rem;
+      background: #25D366;
+      color: #fff;
+      padding: 1rem 2.2rem;
+      border-radius: 100px;
+      text-decoration: none;
+      font-size: 1rem;
+      font-family: 'Lora', serif;
+      font-weight: 500;
+      letter-spacing: 0.03em;
+      transition: background 0.2s, transform 0.15s;
+      box-shadow: 0 4px 20px rgba(37,211,102,0.3);
+    }
+    .btn-whatsapp:hover { background: #1ebe5c; transform: translateY(-2px); }
+    .whatsapp-icon { font-size: 1.3rem; }
+
+    /* ─── CONTACT ─── */
+    #contact { background: var(--cream); padding: 5rem 2rem; }
+
+    .contact-wrap {
+      max-width: 900px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      align-items: start;
+    }
+    .contact-info h3 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.5rem;
+      color: var(--deep);
+      margin-bottom: 1.2rem;
+    }
+    .contact-detail {
+      display: flex; align-items: flex-start; gap: 0.8rem;
+      margin-bottom: 1.1rem;
+      color: var(--text-light);
+      font-size: 0.92rem;
+      line-height: 1.6;
+    }
+    .contact-icon { font-size: 1.1rem; margin-top: 0.1rem; flex-shrink: 0; }
+
+    .contact-form { display: flex; flex-direction: column; gap: 1rem; }
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+    .form-group { display: flex; flex-direction: column; gap: 0.4rem; }
+    .form-group label {
+      font-size: 0.78rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--text-light);
+    }
+    .form-group input,
+    .form-group textarea,
+    .form-group select {
+      padding: 0.75rem 1rem;
+      border: 1.5px solid var(--sand);
+      border-radius: 4px;
+      background: var(--warm-white);
+      color: var(--text);
+      font-family: 'Lora', serif;
+      font-size: 0.9rem;
+      outline: none;
+      transition: border-color 0.2s;
+    }
+    .form-group input:focus,
+    .form-group textarea:focus,
+    .form-group select:focus { border-color: var(--terracotta); }
+    .form-group textarea { resize: vertical; min-height: 110px; }
+    .btn-submit {
+      background: var(--terracotta);
+      color: #fff;
+      border: none;
+      padding: 0.9rem 2rem;
+      border-radius: 4px;
+      font-size: 0.9rem;
+      font-family: 'Lora', serif;
+      cursor: pointer;
+      letter-spacing: 0.05em;
+      transition: background 0.2s, transform 0.15s;
+      align-self: flex-start;
+    }
+    .btn-submit:hover { background: var(--terracotta-dark); transform: translateY(-1px); }
+
+    /* ─── FOOTER ─── */
+    footer {
+      background: var(--deep);
+      color: var(--sand);
+      text-align: center;
+      padding: 2.5rem 1rem;
+      font-size: 0.85rem;
+      line-height: 2;
+    }
+    footer strong {
+      font-family: 'Playfair Display', serif;
+      font-style: italic;
+      color: var(--cream);
+      font-size: 1.1rem;
+    }
+    footer a { color: var(--terracotta); text-decoration: none; }
+
+    /* ─── TOAST ─── */
+    .toast {
+      position: fixed; bottom: 2rem; right: 2rem;
+      background: var(--moss);
+      color: #fff;
+      padding: 1rem 1.5rem;
+      border-radius: 6px;
+      font-size: 0.9rem;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+      transform: translateY(100px); opacity: 0;
+      transition: all 0.35s ease;
+      z-index: 999;
+    }
+    .toast.show { transform: translateY(0); opacity: 1; }
+
+    /* ─── ANIMATIONS ─── */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(24px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    .hero-badge  { animation: fadeUp 0.6s ease both; animation-delay: 0.1s; }
+    .hero-title  { animation: fadeUp 0.6s ease both; animation-delay: 0.2s; }
+    .hero-sub    { animation: fadeUp 0.6s ease both; animation-delay: 0.35s; }
+    .hero-actions{ animation: fadeUp 0.6s ease both; animation-delay: 0.5s; }
+
+    /* ─── RESPONSIVE ─── */
+    @media (max-width: 768px) {
+      #hero { grid-template-columns: 1fr; }
+      .hero-image { min-height: 300px; }
+      .hero-image-overlay { background: linear-gradient(to bottom, var(--cream) 0%, transparent 30%); }
+      .hero-text { padding: 3rem 2rem; }
+      .contact-wrap { grid-template-columns: 1fr; gap: 2.5rem; }
+      .form-row { grid-template-columns: 1fr; }
+      nav { padding: 1rem 1.5rem; }
+      .nav-links { gap: 1.2rem; }
+    }
+    @media (max-width: 480px) {
+      .nav-links { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="#hero" class="nav-logo">Florile Mariucii</a>
+  <ul class="nav-links">
+    <li><a href="#catalog">Catalog</a></li>
+    <li><a href="#order">Comandă</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-text">
+    <span class="hero-badge">🌿 Flori proaspete, cu drag</span>
+    <h1 class="hero-title">
+      Buchete pentru<br/><em>fiecare moment</em><br/>special
+    </h1>
+    <p class="hero-sub">
+      La <strong>Florile Mariucii</strong> creăm aranjamente florale cu suflet — din flori proaspete, alese cu grijă, pentru zilele tale de neuitat.
+    </p>
+    <div class="hero-actions">
+      <a href="#catalog" class="btn-primary">🌸 Vezi Catalogul</a>
+      <a href="#order" class="btn-secondary">Comandă pe WhatsApp</a>
+    </div>
+  </div>
+  <div class="hero-image">
+    <div class="hero-image-overlay"></div>
+  </div>
+</section>
+
+<!-- CATALOG -->
+<section id="catalog">
+  <div class="divider">✦ ✦ ✦</div>
+  <div class="section-header">
+    <span class="section-label">Colecția noastră</span>
+    <h2 class="section-title">Buchete & <em>Aranjamente</em></h2>
+    <p class="section-desc">Fiecare buchet este creat manual, cu flori de sezon și multă dragoste.</p>
+  </div>
+
+  <div class="catalog-grid">
+
+    <div class="product-card">
+      <img class="product-img" src="https://images.unsplash.com/photo-1518895949257-7621c3c786d7?w=500&q=80" alt="Trandafiri roz"/>
+      <div class="product-info">
+        <p class="product-tag">Best Seller</p>
+        <h3 class="product-name">Buchet Trandafiri Roz</h3>
+        <p class="product-desc">25 de trandafiri roz parfumați, legați cu panglică de satin crem.</p>
+        <div class="product-footer">
+          <span class="product-price">150 RON</span>
+          <a href="https://wa.me/40700000000?text=Bună!%20Aș%20dori%20să%20comand%20Buchet%20Trandafiri%20Roz" class="btn-order-small" target="_blank">Comandă</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="product-card">
+      <img class="product-img" src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=500&q=80" alt="Aranjament rustic"/>
+      <div class="product-info">
+        <p class="product-tag">Popular</p>
+        <h3 class="product-name">Aranjament Rustic</h3>
+        <p class="product-desc">Flori de câmp, lavandă și verdeață naturală, în vas de ceramică.</p>
+        <div class="product-footer">
+          <span class="product-price">200 RON</span>
+          <a href="https://wa.me/40700000000?text=Bună!%20Aș%20dori%20să%20comand%20Aranjament%20Rustic" class="btn-order-small" target="_blank">Comandă</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="product-card">
+      <img class="product-img" src="https://images.unsplash.com/photo-1490750967868-88df5691cc9e?w=500&q=80" alt="Buchet Nuntă"/>
+      <div class="product-info">
+        <p class="product-tag">Nuntă & Evenimente</p>
+        <h3 class="product-name">Buchet Mireasă</h3>
+        <p class="product-desc">Bujori albi, trandafiri crem și eucalipt — eleganță pură pentru ziua ta.</p>
+        <div class="product-footer">
+          <span class="product-price">350 RON</span>
+          <a href="https://wa.me/40700000000?text=Bună!%20Aș%20dori%20să%20comand%20Buchet%20Mireasă" class="btn-order-small" target="_blank">Comandă</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="product-card">
+      <img class="product-img" src="https://images.unsplash.com/photo-1523693916964-6b119f0b24a0?w=500&q=80" alt="Cutie flori"/>
+      <div class="product-info">
+        <p class="product-tag">Cadou Special</p>
+        <h3 class="product-name">Cutie Surpriză Florală</h3>
+        <p class="product-desc">Flori mixte aranjate în cutie elegantă — cadoul perfect pentru oricine.</p>
+        <div class="product-footer">
+          <span class="product-price">180 RON</span>
+          <a href="https://wa.me/40700000000?text=Bună!%20Aș%20dori%20să%20comand%20Cutie%20Surpriză%20Florală" class="btn-order-small" target="_blank">Comandă</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="product-card">
+      <img class="product-img" src="https://images.unsplash.com/photo-1548263594-a71ea65a8598?w=500&q=80" alt="Floarea Soarelui"/>
+      <div class="product-info">
+        <p class="product-tag">Veselie & Bucurie</p>
+        <h3 class="product-name">Buchel Floarea Soarelui</h3>
+        <p class="product-desc">Flori de soare pline de energie, perfecte pentru un zâmbet larg.</p>
+        <div class="product-footer">
+          <span class="product-price">120 RON</span>
+          <a href="https://wa.me/40700000000?text=Bună!%20Aș%20dori%20să%20comand%20Buchet%20Floarea%20Soarelui" class="btn-order-small" target="_blank">Comandă</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="product-card">
+      <img class="product-img" src="https://images.unsplash.com/photo-1560717789-0ac7c58ac90a?w=500&q=80" alt="Coroana funerara"/>
+      <div class="product-info">
+        <p class="product-tag">Omagiu</p>
+        <h3 class="product-name">Coroană Florală</h3>
+        <p class="product-desc">Coroană elegantă din crizanteme și verdeață, cu panglică personalizată.</p>
+        <div class="product-footer">
+          <span class="product-price">280 RON</span>
+          <a href="https://wa.me/40700000000?text=Bună!%20Aș%20dori%20să%20comand%20Coroană%20Florală" class="btn-order-small" target="_blank">Comandă</a>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- WHATSAPP ORDER STRIP -->
+<section id="order">
+  <h2 class="order-title">Comandă rapid pe WhatsApp</h2>
+  <p class="order-sub">
+    Scrie-ne ce îți dorești și îți pregătim buchetul în câteva ore.<br/>
+    Livrăm în oraș sau ridici personal din florărie.
+  </p>
+  <a href="https://wa.me/40700000000?text=Bună!%20Aș%20dori%20să%20fac%20o%20comandă." class="btn-whatsapp" target="_blank">
+    <span class="whatsapp-icon">💬</span> Comandă pe WhatsApp
+  </a>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="section-header">
+    <span class="section-label">Vorbim?</span>
+    <h2 class="section-title">Trimite-ne un <em>mesaj</em></h2>
+    <p class="section-desc">Avem un eveniment special sau o întrebare? Suntem aici pentru tine.</p>
+  </div>
+
+  <div class="contact-wrap">
+    <div class="contact-info">
+      <h3>Informații de contact</h3>
+      <div class="contact-detail">
+        <span class="contact-icon">📍</span>
+        <span>Str. Florilor nr. 12, Orașul Tău, România</span>
+      </div>
+      <div class="contact-detail">
+        <span class="contact-icon">📞</span>
+        <span>+40 700 000 000</span>
+      </div>
+      <div class="contact-detail">
+        <span class="contact-icon">✉️</span>
+        <span>contact@florilemariucii.ro</span>
+      </div>
+      <div class="contact-detail">
+        <span class="contact-icon">🕐</span>
+        <span>Luni – Sâmbătă: 8:00 – 19:00<br/>Duminică: 9:00 – 14:00</span>
+      </div>
+    </div>
+
+    <form class="contact-form" onsubmit="handleSubmit(event)">
+      <div class="form-row">
+        <div class="form-group">
+          <label>Nume</label>
+          <input type="text" placeholder="Maria Ionescu" required/>
+        </div>
+        <div class="form-group">
+          <label>Telefon</label>
+          <input type="tel" placeholder="+40 700 000 000"/>
+        </div>
+      </div>
+      <div class="form-group">
+        <label>Subiect</label>
+        <select>
+          <option>Comandă personalizată</option>
+          <option>Eveniment (nuntă, botez)</option>
+          <option>Altă întrebare</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label>Mesaj</label>
+        <textarea placeholder="Spune-ne ce îți dorești..."></textarea>
+      </div>
+      <button type="submit" class="btn-submit">Trimite Mesajul ✉️</button>
+    </form>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <strong>Florile Mariucii</strong><br/>
+  Flori cu drag, pentru momentele tale speciale.<br/>
+  <a href="tel:+40700000000">+40 700 000 000</a> · <a href="mailto:contact@florilemariucii.ro">contact@florilemariucii.ro</a><br/>
+  <small style="opacity:0.5; font-size:0.75rem;">© 2025 Florile Mariucii. Toate drepturile rezervate.</small>
+</footer>
+
+<!-- TOAST -->
+<div class="toast" id="toast">✅ Mesaj trimis! Te contactăm în curând.</div>
+
+<script>
+  function handleSubmit(e) {
+    e.preventDefault();
+    const toast = document.getElementById('toast');
+    toast.classList.add('show');
+    setTimeout(() => toast.classList.remove('show'), 3500);
+    e.target.reset();
+  }
+</script>
+
+</body>
+</html>
